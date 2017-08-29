@@ -1,14 +1,20 @@
 var mouse, centerAtDragStart;
 var center = [0, 0];
 var zoom = 1.0;
-
-var shaderProgram = GL.init().program('mandelbrot.glsl').bind();
+var started = Date.now();
+var shaderProgram = GL.init().program('doublebrot.glsl').bind();
 GL.buffer([-1, 1, -1, -1, 1, -1, 1, 1]).bind('xy', 2);
 
 window.addEventListener('mousewheel', wheel, false);
 window.addEventListener('mousedown', down, false);
 window.addEventListener('mouseup', up, false);
 window.addEventListener('mousemove', move, false);
+
+var info = document.createElement('div');
+info.style.top = '0';
+info.style.position = 'absolute';
+info.style.color = 'lightgray';
+document.body.appendChild(info);
 
 animate();
 
@@ -19,9 +25,11 @@ function animate() {
 
 function drawFrame() {
     shaderProgram.loadFloatUniform("zoom", zoom);
+    shaderProgram.loadFloatUniform("time", (Date.now()-started)/1000);
     shaderProgram.loadVec2Uniform("center", center);
     shaderProgram.loadVec2Uniform("resolution", GL.resolution());
     GL.drawTriangleFan(4);
+    info.innerHTML = 'zoom: ' + zoom + '<br> x: ' + center[0] + '<br> y: ' + center[1];
 }
 
 function wheel(e) {
