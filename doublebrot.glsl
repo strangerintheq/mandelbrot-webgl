@@ -33,7 +33,7 @@ void main(void) {
     vec4 C = vec4(0.0);
     C.zw = p;
 
-    for (int i = 0 ; i < 1024; i++) {
+    for (int i = 0 ; i < 2048; i++) {
 
 		// complex number operations
 		// Z = Z*Z + C
