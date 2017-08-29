@@ -2,7 +2,7 @@ var mouse, centerAtDragStart;
 var center = [0, 0];
 var zoom = 1.0;
 
-var shaderProgram = GL.init().program('example.glsl').bind();
+var shaderProgram = GL.init().program('mandelbrot.glsl').bind();
 GL.buffer([-1, 1, -1, -1, 1, -1, 1, 1]).bind('xy', 2);
 
 window.addEventListener('mousewheel', wheel, false);
