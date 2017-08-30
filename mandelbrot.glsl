@@ -34,11 +34,11 @@ vec2 conjugate(vec2 a) {
 
 vec3 color(int i, vec2 z) {
     float it = float(i);
-    if (smoothing) {
+//    if (smoothing) {
         float sl = it - log2(log2(dot(z,z))) + 4.0;
         float al = smoothstep(-0.1, 0.0, sin(0.5 * 6.2831));
         it = mix(it, sl, al);
-    }
+//    }
     return 0.5 + 0.5 * cos(3.0 + it * 0.05  + vec3(0.0, 0.6, 1.0));
 }
 
